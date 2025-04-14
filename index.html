@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const number = prompt("Введите трехзначное число (например, 777):");
+        const digits = number.split("");
+        const [a, b, c] = digits;
+        const allEqual = a === b && b === c;
+        const someEqual = a === b || a === c || b === c;
+        alert(`Все цифры одинаковые? ${allEqual ? "Да" : "Нет"}
+        Есть ли две одинаковые? ${someEqual ? "Да" : "Нет"}`);
+      </script>
+      
+</body>
+</html>
