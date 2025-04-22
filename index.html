@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function removeChars(str, charsToRemove) {
+  let result = "";
+
+  for (let char of str) {
+    if (!charsToRemove.includes(char)) {
+      result += char;
+    }
+  }
+
+  return result;
+}
+
+const inputStr = prompt("Введите любой текст");
+const removeCharsStr = prompt("Введите любые символы которые хотите убрать из текста, например: ld)");
+
+const charsArray = removeCharsStr.split("");
+const cleanedStr = removeChars(inputStr, charsArray);
+alert(`Результат: ${cleanedStr}`);
+
+    </script>
+</body>
+</html>
