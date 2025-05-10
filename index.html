@@ -6,10 +6,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="text-block">Смена цвета!</div>
+  <button onclick="toggleColor()">Сменить цвет</button>
 
-  <div id="text-block">Текст для смены цваета</div>
-  <button id="color-toggle">Сменить цвет</button>
-
-  <script src="script.js"></script>
+  <script>
+    function toggleColor() {
+      const block = document.getElementById("text-block");
+      block.classList.toggle("colored");
+    }
+  </script>
 </body>
 </html>
