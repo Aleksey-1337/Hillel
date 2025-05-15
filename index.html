@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .button-container {
+      display: flex;
+      gap: 10px;
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="button-container" id="buttonContainer">
+    <button data-name="Кнопка 1">Кнопка 1</button>
+    <button data-name="Кнопка 2">Кнопка 2</button>
+    <button data-name="Кнопка 3">Кнопка 3</button>
+    <button data-name="Кнопка 4">Кнопка 4</button>
+  </div>
+
+  <script>
+    const container = document.getElementById("buttonContainer");
+
+    container.addEventListener("click", function(event) {
+      if (event.target.tagName === "BUTTON") {
+        const name = event.target.dataset.name;
+        alert(`Нажали на ${name}`);
+      }
+    });
+  </script>
+
+</body>
+</html>
