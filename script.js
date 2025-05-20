@@ -1,59 +1,48 @@
-const form = document.getElementById('contactForm');
-const errorMessages = form.querySelectorAll('.error-message');
-
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
-
-  let isValid = true;
-
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('contactForm');
   const nameInput = form.elements['name'];
   const messageInput = form.elements['message'];
   const phoneInput = form.elements['phone'];
   const emailInput = form.elements['email'];
 
-  clearErrors();
-
-  if (!nameInput.value.trim()) {
-    showError(nameInput, 'Ім’я обов’язкове');
-    isValid = false;
+  function showError(input, message) {
+    const errorElement = input.closest('.form-group').querySelector('.error-message');
+    errorElement.textContent = message;
+    input.classList.add('error');
   }
 
-  if (messageInput.value.trim().length < 5) {
-    showError(messageInput, 'Повідомлення має містити не менше 5 символів');
-    isValid = false;
+  function clearError(input) {
+    const errorElement = input.closest('.form-group').querySelector('.error-message');
+    errorElement.textContent = '';
+    input.classList.remove('error');
   }
 
-  const phoneRegex = /^\+380\d{9}$/;
-  if (!phoneRegex.test(phoneInput.value.trim())) {
-    showError(phoneInput, 'Телефон повинен починатися з +380 і містити 9 цифр');
-    isValid = false;
+  function validateField(input, validatorFn, errorMessage) {
+    const value = input.value.trim();
+    if (!validatorFn(value)) {
+      showError(input, errorMessage);
+      return false;
+    }
+    return true;
   }
 
-  const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
-  if (!emailRegex.test(emailInput.value.trim())) {
-    showError(emailInput, 'Некоректна електронна пошта');
-    isValid = false;
+  function addValidationListeners(input) {
+    input.addEventListener('input', () => clearError(input));
   }
 
-  if (isValid) {
-    const formData = {
-      name: nameInput.value.trim(),
-      message: messageInput.value.trim(),
-      phone: phoneInput.value.trim(),
-      email: emailInput.value.trim(),
-    };
-    console.log('Дані з форми:', formData);
-    alert('Форму надіслано успішно!');
-    form.reset();
-  }
+  [nameInput, messageInput, phoneInput, emailInput].forEach(addValidationListeners);
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    let isValid = true;
+
+    isValid &= validateField(nameInput, val => val !== '', 'Ім’я обов’язкове');
+    isValid &= validateField(messageInput, val => val.length >= 5, 'Повідомлення має містити не менше 5 символів');
+    isValid &= validateField(phoneInput, val => /^\+380\d{9}$/.test(val), 'Телефон повинен починатися з +380 і містити 9 цифр');
+    isValid &= validateField(emailInput, val => /^[^@]+@[^@]+\.[^@]+$/.test(val), 'Некоректна електронна пошта');
+
+    if (isValid) {
+      form.submit();
+    }
+  });
 });
-
-function showError(inputElement, message) {
-  const error = inputElement.parentElement.querySelector('.error-message');
-  error.textContent = message;
-  error.style.color = 'red';
-}
-
-function clearErrors() {
-  errorMessages.forEach(msg => (msg.textContent = ''));
-}
