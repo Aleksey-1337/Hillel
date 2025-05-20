@@ -7,8 +7,16 @@ addBtn.addEventListener('click', () => {
 
   if (taskText !== '') {
     const li = document.createElement('li');
-    li.innerHTML = `${taskText} <button class="deleteBtn">Видалити</button>`;
+    const textNode = document.createTextNode(taskText);
+    const deleteBtn = document.createElement('button');
+
+    deleteBtn.textContent = 'Удалить';
+    deleteBtn.classList.add('deleteBtn');
+
+    li.appendChild(textNode);
+    li.appendChild(deleteBtn);
     taskList.appendChild(li);
+
     taskInput.value = '';
   }
 });
