@@ -1,0 +1,36 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #2952a3, #1e3c72);
+  color: white;
+  text-align: center;
+  padding: 50px;
+}
+
+.weather-widget {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  display: inline-block;
+  min-width: 300px;
+}
+
+#weather p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+#refresh {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ffffff33;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+#refresh:hover {
+  background-color: #ffffff55;
+}
