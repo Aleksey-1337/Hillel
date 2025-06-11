@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Віджет погоди</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Погода</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="weather-widget">
-    <h1>Погода</h1>
-    <div id="weather">
-      <p>Завантаження...</p>
-    </div>
-    <button id="refresh">Оновити</button>
+    <h2>Погода</h2>
+    <p class="weather__city"></p>
+    <p class="weather__temp"></p>
+    <p class="weather__feels"></p>
+    <p class="weather__desc"></p>
+    <p class="weather__humidity"></p>
+    <p class="weather__pressure"></p>
+    <p class="weather__wind"></p>
+    <button class="weather__refresh">Оновити</button>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

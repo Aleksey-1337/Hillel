@@ -1,34 +1,44 @@
-const apiKey = '1a8cad34c688a6c57fe1e6b89ca8501d';
 const city = 'Kyiv';
-const weatherEl = document.getElementById('weather');
-const refreshBtn = document.getElementById('refresh');
+const apiKey = '1a8cad34c688a6c57fe1e6b89ca8501d';
 
-async function fetchWeather() {
-  weatherEl.innerHTML = '<p>Завантаження...</p>';
+const elements = {
+  city: document.querySelector('.weather__city'),
+  temp: document.querySelector('.weather__temp'),
+  feels: document.querySelector('.weather__feels'),
+  desc: document.querySelector('.weather__desc'),
+  humidity: document.querySelector('.weather__humidity'),
+  pressure: document.querySelector('.weather__pressure'),
+  wind: document.querySelector('.weather__wind'),
+  refresh: document.querySelector('.weather__refresh')
+};
 
-  try {
-    const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ua`
-    );
-    const data = await res.json();
-
-    const weatherHTML = `
-      <p><strong>Місто:</strong> ${data.name}</p>
-      <p><strong>Температура:</strong> ${data.main.temp}°C</p>
-      <p><strong>Відчувається як:</strong> ${data.main.feels_like}°C</p>
-      <p><strong>Погода:</strong> ${data.weather[0].description}</p>
-      <p><strong>Тиск:</strong> ${data.main.pressure} hPa</p>
-      <p><strong>Вологість:</strong> ${data.main.humidity}%</p>
-      <p><strong>Вітер:</strong> ${data.wind.speed} м/с</p>
-      <p><strong>Оновлено:</strong> ${new Date().toLocaleTimeString()}</p>
-    `;
-    weatherEl.innerHTML = weatherHTML;
-  } catch (error) {
-    weatherEl.innerHTML = '<p>Помилка при завантаженні даних</p>';
-    console.error(error);
-  }
+function fetchWeather() {
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=ua`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Помилка при завантаженні даних');
+      }
+      return response.json();
+    })
+    .then(data => {
+      elements.city.textContent = `Місто: ${data.name}`;
+      elements.temp.textContent = `Температура: ${Math.round(data.main.temp)}°C`;
+      elements.feels.textContent = `Відчувається як: ${Math.round(data.main.feels_like)}°C`;
+      elements.desc.textContent = `${data.weather[0].description}`;
+      elements.humidity.textContent = `Вологість: ${data.main.humidity}%`;
+      elements.pressure.textContent = `Тиск: ${data.main.pressure} hPa`;
+      elements.wind.textContent = `Вітер: ${data.wind.speed} м/с`;
+    })
+    .catch(error => {
+      elements.city.textContent = '';
+      elements.temp.textContent = '';
+      elements.feels.textContent = '';
+      elements.desc.textContent = 'Помилка при завантаженні даних';
+      elements.humidity.textContent = '';
+      elements.pressure.textContent = '';
+      elements.wind.textContent = '';
+    });
 }
 
-refreshBtn.addEventListener('click', fetchWeather);
-
+elements.refresh.addEventListener('click', fetchWeather);
 fetchWeather();
