@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ToDo with Babel</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>ToDoList</h1>
+    <form class="form js--form">
+        <input type="text" name="value" required class="form__input js--form__input">
+        <button class="form__btn">Додати</button>
+    </form>
+    <ul class="js--todos-wrapper">
+    </ul>
+  </div>
+
+  <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="taskModalLabel">Завдання</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+        </div>
+        <div class="modal-body" id="modalTaskContent">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="./dist/script.js"></script>
+</body>
+</html>
