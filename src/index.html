@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToDo List</title>
+</head>
+<body>
+  <div class="container">
+    <h1>ToDoList</h1>
+    <form class="form js--form">
+      <input type="text" required class="form__input js--form__input" />
+      <button class="form__btn">Додати</button>
+    </form>
+    <ul class="js--todos-wrapper"></ul>
+  </div>
+  <div class="modal fade" id="taskModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Завдання</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="modalTaskContent"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
